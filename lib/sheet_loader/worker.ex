@@ -2,7 +2,9 @@ defmodule SheetLoader.Worker do
   require Logger
   use GenServer
 
-  # TODO: this is not the best way to save it to a file :)
+  @default_poll_delay 5 * 60
+  @default_dir "."
+
   # require IEx
   # IEx.pry
   def start_link do
@@ -14,14 +16,21 @@ defmodule SheetLoader.Worker do
   defp loop do
     receive do
       :update ->
-        version_key = GoogleSheets.latest_key! :my_sheet
+        # For now we only support one spreadsheet
+        [config] = Application.get_env :google_sheets, :spreadsheets, []
+
+        spreadsheet_config_id = Keyword.fetch! config, :id
+        poll_delay_seconds    = Keyword.get(config, :poll_delay_seconds, @default_poll_delay)
+        dir                   = Keyword.get(config, :dir, @default_dir)
+
+        version_key = GoogleSheets.latest_key! spreadsheet_config_id
         data        = GoogleSheets.fetch! version_key
 
         Logger.info "Writing yaml to file..."
-        File.write! "priv/data/en.yaml", data
+        File.write! dir <> "/en.yaml", data
 
         send self, :update # never-ending loop
-        :timer.sleep(2000)
+        :timer.sleep(poll_delay_seconds * 5 * 1000) # This timer needs to always be more than poll_delay_seconds
     end
   end
 

@@ -18,3 +18,7 @@ MIX_ENV=prod mix run --no-halt
 workers in `Supervisor`.
 
 `--no-halt` is what I needed from the start. (http://stackoverflow.com/questions/30687781/how-to-run-elixir-application)
+
+```elixir
+:timer.sleep(poll_delay_seconds * 5 * 1000) # This timer needs to always be more than poll_delay_seconds
+```
