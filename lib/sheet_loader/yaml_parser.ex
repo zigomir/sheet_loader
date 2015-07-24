@@ -1,18 +1,10 @@
 defmodule SheetLoader.YamlParser do
-  require Logger
+
   @behaviour GoogleSheets.Parser
 
-  # TODO: this is not the best way to save it to a file :)
-  # require IEx
-  # IEx.pry
   def parse(_id, _version, worksheets) do
     yaml = assemble_yaml(worksheets)
-
-
-    Logger.info "Writing yaml to file..."
-    File.write! "priv/data/en.yaml", yaml
-
-    {:ok, worksheets}
+    {:ok, yaml}
   end
 
   defp assemble_yaml([%GoogleSheets.WorkSheet{csv: csv, name: name}]) do
