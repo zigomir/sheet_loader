@@ -14,7 +14,7 @@ defmodule SheetLoader.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :google_sheets]]
+    [applications: [:logger, :google_sheets], mod: {SheetLoader, []}] # with this SheetLoader needs to be an OTP app
   end
 
   # Dependencies can be Hex packages:
