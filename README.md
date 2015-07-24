@@ -6,6 +6,12 @@ Edit `config/config.exs`.
 iex -S mix
 ```
 
+## Testing
+
+```sh
+mix test --no-start
+```
+
 ## Prod run
 
 ```sh

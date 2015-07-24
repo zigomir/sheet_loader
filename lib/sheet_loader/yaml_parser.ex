@@ -20,6 +20,7 @@ defmodule SheetLoader.YamlParser do
   end
 
   defp extract_key_values([]), do: ""
+  defp extract_key_values([[""]]), do: ""
   defp extract_key_values([key_value | rest]) do
     [key | [value | _]] = key_value
     "- #{key}: #{value}\n" <> extract_key_values(rest)
