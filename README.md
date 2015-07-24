@@ -6,6 +6,11 @@ Edit `config/config.exs`.
 iex -S mix
 ```
 
+## Prod run
+
+```sh
+MIX_ENV=prod mix run --no-halt
+```
 
 ## Learned
 
