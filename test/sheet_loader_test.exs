@@ -6,15 +6,14 @@ defmodule SheetLoaderTest do
     title,SimpleSite v0.1
     x,y
     """
-    name = "en"
 
-    {:ok, yaml} = SheetLoader.YamlParser.parse(0, 0, [%GoogleSheets.WorkSheet{csv: csv, name: name}])
+    {:ok, yaml} = SheetLoader.YamlParser.parse(0, 0, [%GoogleSheets.WorkSheet{csv: csv, name: "en"}])
 
     assert yaml == """
     ---
     en:
-    - title: SimpleSite v0.1
-    - x: y
+      title: SimpleSite v0.1
+      x: y
 
     """
   end

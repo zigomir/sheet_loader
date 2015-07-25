@@ -24,13 +24,31 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :google_sheets, spreadsheets: [
+    # [
+    #   id: :my_sheet,
+    #   parser: SheetLoader.YamlParser,
+    #   sheets: ["en"],
+    #   loader: GoogleSheets.Loader.Docs,
+    #   poll_delay_seconds: 1,
+    #   dir: "priv/data",
+    #   url: "https://spreadsheets.google.com/feeds/worksheets/1TgfWukYampLldgjS7quiF8HKvlvvyHrxkChtNkHBwqs/public/basic"
+    # ]
     [
-      id: :my_sheet,
+      id: :en_center_mirje,
       parser: SheetLoader.YamlParser,
       sheets: ["en"],
       loader: GoogleSheets.Loader.Docs,
-      poll_delay_seconds: 1,
-      dir: "priv/data",
-      url: "https://spreadsheets.google.com/feeds/worksheets/1TgfWukYampLldgjS7quiF8HKvlvvyHrxkChtNkHBwqs/public/basic"
+      poll_delay_seconds: 2,
+      dir: "../../center-mirje/locales",
+      url: "https://spreadsheets.google.com/feeds/worksheets/1TqpjFZjp8eu3mp3sXltN_FEuZJMPKYoVOX_qAKyBCg4/public/basic"
+    ],
+    [
+      id: :sl_center_mirje,
+      parser: SheetLoader.YamlParser,
+      sheets: ["sl"],
+      loader: GoogleSheets.Loader.Docs,
+      poll_delay_seconds: 2,
+      dir: "../../center-mirje/locales",
+      url: "https://spreadsheets.google.com/feeds/worksheets/1TqpjFZjp8eu3mp3sXltN_FEuZJMPKYoVOX_qAKyBCg4/public/basic"
     ]
   ]
