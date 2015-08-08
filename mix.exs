@@ -27,6 +27,6 @@ defmodule SheetLoader.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:google_sheets, "~> 1.0.2"}]
+    [{:google_sheets, "~> 1.0.4"}]
   end
 end

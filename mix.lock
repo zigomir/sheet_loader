@@ -3,7 +3,7 @@
   "erlware_commons": {:hex, :erlware_commons, "0.13.0"},
   "exrm": {:hex, :exrm, "0.18.5"},
   "getopt": {:hex, :getopt, "0.8.2"},
-  "google_sheets": {:hex, :google_sheets, "1.0.2"},
+  "google_sheets": {:hex, :google_sheets, "1.0.4"},
   "hackney": {:hex, :hackney, "1.1.0"},
   "httpoison": {:hex, :httpoison, "0.7.0"},
   "idna": {:hex, :idna, "1.0.2"},
