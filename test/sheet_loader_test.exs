@@ -7,7 +7,7 @@ defmodule SheetLoaderTest do
     x,y
     """
 
-    {:ok, yaml} = SheetLoader.YamlParser.parse(0, 0, [%GoogleSheets.WorkSheet{csv: csv, name: "en"}])
+    {:ok, %{en: yaml}} = SheetLoader.YamlParser.parse(0, 0, [%GoogleSheets.WorkSheet{csv: csv, name: "en"}])
 
     assert yaml == """
     ---
