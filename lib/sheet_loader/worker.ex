@@ -1,13 +1,12 @@
+require IEx
+
 defmodule SheetLoader.Worker do
   require Logger
   use GenServer
 
   @default_poll_delay 5 * 60
   @default_dir "."
-  @default_sheet "en"
 
-  # require IEx
-  # IEx.pry
   def start_link do
     {:ok, pid} = Task.start_link(fn -> loop() end)
     send pid, :update
@@ -30,13 +29,14 @@ defmodule SheetLoader.Worker do
     spreadsheet_config_id = Keyword.fetch! config, :id
     poll_delay_seconds    = Keyword.get(config, :poll_delay_seconds, @default_poll_delay)
     dir                   = Keyword.get(config, :dir, @default_dir)
-    [sheet]               = Keyword.get(config, :sheets, @default_sheet) # Assumption: only one sheet per spreadsheet config
 
-    {version_key, data} = GoogleSheets.latest! spreadsheet_config_id
-    file                = "#{dir}/#{sheet}.yml"
+    {version_key, worksheets_as_yaml} = GoogleSheets.latest! spreadsheet_config_id
 
-    Logger.info "Writing #{file} file..."
-    File.write! file, data
+    Enum.map Map.keys(worksheets_as_yaml), fn worksheet_tab ->
+      file_path = "#{dir}/#{worksheet_tab}.yml"
+      Logger.info "Writing #{file_path} file..."
+      File.write! file_path, Map.get(worksheets_as_yaml, worksheet_tab)
+    end
 
     save_yaml_file_for_sheet(rest)
     poll_delay_seconds
