@@ -12,6 +12,8 @@ will need these YAML files as public content of websites.
 
 Edit `config/config.exs`.
 
+Run `mix gs.fetch` to set up initial CSV files.
+
 ```sh
 iex -S mix
 ```
@@ -22,12 +24,12 @@ iex -S mix
 mix test --no-start
 ```
 
-## Prod run
+## Running in production
 
 Be sure to run `mix gs.fetch` before `mix run` to set up initial CSV files.
 
 ```sh
-MIX_ENV=prod mix run --no-halt
+mix gs.fetch && MIX_ENV=prod mix run --no-halt
 ```
 
 ## Learned
@@ -39,3 +41,4 @@ workers in `Supervisor`.
 
 ```elixir
 :timer.sleep(poll_delay_seconds * 5 * 1000) # This timer needs to always be more than poll_delay_seconds
+```
