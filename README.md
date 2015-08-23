@@ -39,27 +39,3 @@ workers in `Supervisor`.
 
 ```elixir
 :timer.sleep(poll_delay_seconds * 5 * 1000) # This timer needs to always be more than poll_delay_seconds
-```
-
-## What's wrong
-
-Latest version key returned by `GoogleSheets.latest_key` isn't correct for the spreadsheet config id.
-
-```
-01:25:39.690 [info]  Writing ../../center-mirje/locales/en.yml file...
-ConfigID: en_center_mirje
-latest_version_key: b5a60adb0b0cab3ff64d1a95cfc5573c7638c166
-
-01:25:39.690 [info]  Writing ../../center-mirje/locales/sl.yml file...
-ConfigID: sl_center_mirje
-latest_version_key: b5a60adb0b0cab3ff64d1a95cfc5573c7638c166
-```
-
-There you can see that `ConfigID` is different in both times, but `latest_version_key` is the same, even though it
-shouldn't be. I suspect this line in `google_sheets.ex` file:
-
-```elixir
-[{{^spreadsheet_id, :latest}, key}] -> {:ok, key}
-```
-
-It might be a pin (`^`) operator's fault? Dunno. Write a test that fails that.
