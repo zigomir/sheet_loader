@@ -31,6 +31,7 @@ mix test --no-start
 Be sure to run `mix gs.fetch` before `mix run` to set up initial CSV files.
 
 ```sh
+cp config/dev.exs config/prod.exs # edit your prod.exs config file
 mix gs.fetch && MIX_ENV=prod mix run --no-halt
 ```
 
