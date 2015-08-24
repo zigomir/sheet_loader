@@ -14,7 +14,6 @@ defmodule SheetLoader.YamlParser do
     assemble_yaml_to_sheet_map(rest, map)
   end
 
-  defp assemble_yaml([]), do: ""
   defp assemble_yaml(csv, name) do
     rows                 = String.split csv, "\n"
     rows_as_key_values   = Enum.map rows, fn row -> String.split row, ",", parts: 2 end
