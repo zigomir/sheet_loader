@@ -3,8 +3,8 @@ defmodule SheetLoader.Mixfile do
 
   def project do
     [app: :sheet_loader,
-     version: "0.0.1",
-     elixir: "~> 1.0",
+     version: "0.1.0",
+     elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -27,6 +27,6 @@ defmodule SheetLoader.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:google_sheets, "~> 1.0.4"}]
+    [{:google_sheets, "~> 2.0.0"}]
   end
 end

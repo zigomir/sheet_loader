@@ -1,14 +1,12 @@
 # SheetLoader
 
 Elixir program that polls Google Spreadsheet and serializes it into YAML file on disk.
-Will be used later on with Middleman or another static site generator that supports YAML format.
 
 Each spreadsheet tab will be saved as different YAML file.
 
 It's based on [GoogleSheets](https://github.com/GrandCru/GoogleSheets) library.
 
-Before you begin you'll need to give your Spreadsheet public read access. Which you want anyway, because you usually
-will need these YAML files as public content of websites.
+Before you begin you'll need to give your Spreadsheet public read access.
 
 ## Setup & development
 
