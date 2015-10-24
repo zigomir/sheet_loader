@@ -2,7 +2,7 @@ defmodule SheetLoader.YamlParser do
 
   @behaviour GoogleSheets.Parser
 
-  def parse(_id, _version, worksheets) do
+  def parse(_id, worksheets) do
     map = assemble_yaml_to_sheet_map(worksheets, %{})
     {:ok, map}
   end

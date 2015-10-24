@@ -1,8 +1,7 @@
 use Mix.Config
 
 config :google_sheets, spreadsheets: [
-    [
-      id: :test_sheet,
+    config: [
       parser: SheetLoader.YamlParser,
       poll_delay_seconds: 10,
       dir: "priv/data",
