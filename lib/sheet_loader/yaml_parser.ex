@@ -30,7 +30,23 @@ defmodule SheetLoader.YamlParser do
   defp extract_key_values([[""]]), do: ""
   defp extract_key_values([key_value | rest]) do
     [key | [value | _]] = key_value
-    "  #{key}: #{value}\n" <> extract_key_values(rest)
+
+    if String.contains?(value, "[") and String.contains?(value, "]") do
+      list_values = value
+        |> String.replace("\"", "") # TODO: what about when we want to have " in content
+        |> String.replace("[", "")
+        |> String.replace("]", "")
+        |> String.split(",")
+        |> Enum.map(fn(v) -> String.strip(v) end)
+        |> Enum.join("\n    - ")
+
+      """
+        #{key}:
+          - #{list_values}
+      """ <> extract_key_values(rest)
+    else
+      "  #{key}: #{value}\n" <> extract_key_values(rest)
+    end
   end
 
 end
