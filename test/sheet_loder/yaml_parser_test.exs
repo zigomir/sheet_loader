@@ -1,4 +1,4 @@
-defmodule SheetLoaderTest do
+defmodule SheetLoader.YamlParserTest do
   use ExUnit.Case
 
   test "Parse CSV to YAML key values" do
