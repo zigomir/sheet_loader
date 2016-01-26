@@ -43,3 +43,5 @@ workers in `Supervisor`.
 ```elixir
 :timer.sleep(poll_delay_seconds * 5 * 1000) # This timer needs to always be more than poll_delay_seconds
 ```
+
+To skip `IEx.pry` write down `respawn` inside `IEx` session.
