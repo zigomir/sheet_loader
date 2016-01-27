@@ -16,38 +16,19 @@ defmodule SheetLoader.JsonParser do
   end
 
   defp assemble_json(csv, name) do
-    rows                 = String.split csv, "\n"
-    rows_as_key_values   = Enum.map rows, fn row -> String.split row, ",", parts: 2 end
-    json_key_values      = extract_key_values rows_as_key_values
-
+    rows               = String.split csv, "\n"
+    rows_as_key_values = Enum.map rows, fn row -> String.split row, ",", parts: 2 end
+    json_key_values    = "{" <> String.replace_trailing(extract_key_values(rows_as_key_values), ",", "") <> "}"
     """
     {"#{name}":#{json_key_values}}
     """
   end
 
-  defp extract_key_values([]), do: ""
-  defp extract_key_values([[""]]), do: ""
+  defp extract_key_values([]), do: []
+  defp extract_key_values([[""]]), do: []
   defp extract_key_values([key_value | rest]) do
     [key | [value | _]] = key_value
-
-    if String.contains?(value, "[") and String.contains?(value, "]") do
-      # list_values = value
-      #   |> String.replace("\"", "") # TODO: what about when we want to have " in content
-      #   |> String.replace("[", "")
-      #   |> String.replace("]", "")
-      #   |> String.split(",")
-      #   |> Enum.map(fn(v) -> String.strip(v) end)
-      #   |> Enum.join("\n    - ")
-      #
-      # """
-      #   #{key}:
-      #     - #{list_values}
-      # """ <> extract_key_values(rest)
-    else
-      """
-      {"#{key}":"#{value}"}
-      """ <> extract_key_values(rest)
-    end
+    ~s("#{key}":"#{value}",#{extract_key_values(rest)})
   end
 
 end
