@@ -16,5 +16,4 @@ defmodule SheetLoader do
     opts = [strategy: :one_for_one, name: SheetLoader.Supervisor]
     Supervisor.start_link(children, opts)
   end
-
 end
